@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michael Andreas Berger | Mathe & Informatik Nachhilfe Online</title>
-    <meta name="description" content="Professionelle Online Nachhilfe für Mathe und Informatik von Michael Andreas Berger. Softwareentwickler & Student mit 4 Jahren Erfahrung. DACH-Region.">
+    <meta name="description" content="Professionelle Online Nachhilfe für Mathe und Informatik von Michael Andreas Berger. Softwareentwickler & Student mit über 3 Jahren Erfahrung. DACH-Region.">
     <meta name="keywords" content="Michael Andreas Berger, Online Nachhilfe Mathe, Mathe Nachhilfe Deutschland, Nachhilfe Österreich Schweiz, Informatik Nachhilfe">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -19,13 +19,16 @@
             --secondary: #7000ff;
             --accent: #ff00c8;
             --bg-light: #ffffff;
-            --bg-soft: #f0f7ff;
+            --bg-soft: #f8fbff;
             --text-main: #0f172a;
             --text-muted: #475569;
             --white: #ffffff;
-            --radius: 24px;
-            --shadow: 0 10px 40px -10px rgba(0, 210, 255, 0.2);
-            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --shadow: 0 20px 50px -12px rgba(0, 210, 255, 0.15);
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --whatsapp: #25D366;
+            --zoom: #2D8CFF;
         }
 
         * {
@@ -42,69 +45,42 @@
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
             background-color: var(--bg-light);
-            line-height: 1.7;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .brand {
+        h1, h2, h3, h4, .brand {
             font-family: 'Outfit', sans-serif;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
 
-        /* --- Background Animation --- */
-        .grid-container {
+        /* --- Background Layers --- */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 10% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 40%);
+        }
+
+        .grid-lines {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(to bottom, #ffffff, #f0f9ff);
-            perspective: 1000px;
-            overflow: hidden;
-        }
-
-        .grid {
-            position: absolute;
-            bottom: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
             background-image: 
-                linear-gradient(rgba(0, 210, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 210, 255, 0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
-            transform: rotateX(60deg);
-            animation: grid-move 25s linear infinite;
-        }
-
-        @keyframes grid-move {
-            0% { transform: rotateX(60deg) translateY(0); }
-            100% { transform: rotateX(60deg) translateY(60px); }
-        }
-
-        .glow-sphere {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 210, 255, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(80px);
-            top: -200px;
-            right: -200px;
-            z-index: -1;
-        }
-
-        /* --- Layout --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            padding: 120px 0;
+                linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+            opacity: 0.5;
         }
 
         /* --- Navigation --- */
@@ -112,32 +88,36 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             z-index: 1000;
             transition: var(--transition);
         }
 
         nav.scrolled {
             background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             padding: 1.2rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
             border-bottom: 1px solid rgba(0, 210, 255, 0.1);
         }
 
-        nav .container {
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--text-main);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-weight: 800;
         }
 
         .logo span {
@@ -149,44 +129,98 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 3.5rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-main);
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
-            font-size: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
         }
 
-        /* --- Hero --- */
+        .nav-links a:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        /* --- Hero Section --- */
         .hero {
-            padding: 220px 0 140px;
-            text-align: center;
+            padding: 240px 0 160px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 6rem;
+            align-items: center;
         }
 
-        .hero h1 {
-            font-size: clamp(3.2rem, 9vw, 5rem);
-            line-height: 1.05;
+        .hero-text h1 {
+            font-size: clamp(3.5rem, 8vw, 5.5rem);
+            line-height: 1;
             margin-bottom: 2rem;
-            background: linear-gradient(to bottom right, #0f172a, #334155, var(--primary));
+        }
+
+        .hero-text h1 span {
+            display: block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            font-size: 1.45rem;
+        .hero-text p {
+            font-size: 1.35rem;
             color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto 3.5rem;
+            margin-bottom: 3.5rem;
+            max-width: 600px;
         }
 
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image .img-wrapper {
+            width: 100%;
+            aspect-ratio: 1/1.1;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: #eee;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-image .floating-badge {
+            position: absolute;
+            bottom: 30px;
+            left: -40px;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2;
+        }
+
+        /* --- Button Style --- */
         .btn {
             display: inline-block;
-            padding: 1.3rem 3.5rem;
+            padding: 1.4rem 3.5rem;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 700;
@@ -194,133 +228,140 @@
             transition: var(--transition);
             cursor: pointer;
             border: none;
+            font-size: 1.1rem;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            box-shadow: 0 12px 30px rgba(0, 210, 255, 0.35);
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.4);
         }
 
-        /* --- About Section (Personalized) --- */
-        .about-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius);
-            padding: 5rem;
+        .btn-primary:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 45px rgba(0, 210, 255, 0.6);
+        }
+
+        /* --- Content Sections --- */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            margin-bottom: 6rem;
+            max-width: 800px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            padding: 4rem 3rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            background: white;
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        /* Unified Icon Wrapper for alignment */
+        .card-icon-wrapper {
+            height: 64px;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- Method Visuals --- */
+        .method-container {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: 6rem;
             align-items: center;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .about-visual {
-            position: relative;
-            border-radius: calc(var(--radius) - 8px);
-            overflow: hidden;
-            aspect-ratio: 1/1.2;
             background: var(--bg-soft);
-        }
-
-        .about-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .about-content h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-content .tagline {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        /* --- Stock Image Sections --- */
-        .stock-banner {
-            width: 100%;
-            height: 400px;
             border-radius: 40px;
-            margin: 4rem 0;
+            padding: 100px 5rem;
+            margin-bottom: 120px;
+        }
+
+        .method-image {
+            border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow);
+            aspect-ratio: 4/5;
         }
 
-        .stock-banner img {
+        .method-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* --- Legal & Cookie Banner --- */
-        #cookie-banner {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            padding: 1.5rem 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        .method-list {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .method-point {
             display: flex;
-            align-items: center;
-            gap: 2rem;
-            z-index: 2000;
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            width: 90%;
-            max-width: 800px;
-            display: none;
+            gap: 1.5rem;
         }
 
-        #cookie-banner.active {
-            display: flex;
+        .method-point .number {
+            font-family: 'Outfit';
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.3;
+            line-height: 1;
         }
 
-        .legal-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(5px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-            padding: 2rem;
-        }
-
-        .legal-content {
-            background: white;
-            padding: 4rem;
-            border-radius: 30px;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-muted);
+        /* --- Branding --- */
+        .brand-icon {
+            width: 54px;
+            height: 54px;
+            fill: currentColor;
         }
 
         /* --- Animations --- */
         [data-reveal] {
             opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         [data-reveal].revealed {
@@ -328,140 +369,196 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .about-card { grid-template-columns: 1fr; padding: 3rem; }
-            .hero h1 { font-size: 4rem; }
+        /* --- Mobile Responsive --- */
+        @media (max-width: 1100px) {
+            .hero { grid-template-columns: 1fr; gap: 4rem; padding-top: 180px; }
+            .hero-text { order: 2; text-align: center; }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .hero-image { order: 1; max-width: 550px; margin: 0 auto; }
+            .method-container { grid-template-columns: 1fr; padding: 60px 2.5rem; gap: 4rem; }
+            .method-image { max-width: 600px; margin: 0 auto; aspect-ratio: 16/10; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .section-title h2 { font-size: 2.5rem; }
+            .price-text { font-size: 4.5rem; }
+            .section { padding: 80px 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="grid-container">
-        <div class="grid"></div>
-        <div class="glow-sphere"></div>
-    </div>
+    <div class="grid-bg"></div>
+    <div class="grid-lines"></div>
 
     <nav id="navbar">
-        <div class="container">
+        <div class="container nav-content">
             <a href="#" class="logo"><span>Synth</span>Lernen</a>
             <ul class="nav-links">
-                <li><a href="#uber-mich">Über mich</a></li>
-                <li><a href="#leistungen">Leistungen</a></li>
-                <li><a href="#preise">Preise</a></li>
+                <li><a href="#über-mich">Über mich</a></li>
+                <li><a href="#methodik">Unterricht</a></li>
+                <li><a href="#fächer">Leistungen</a></li>
                 <li><a href="#termin">Termin</a></li>
             </ul>
-            <a href="#termin" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1rem;">Jetzt anfragen</a>
+            <a href="#termin" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 0.9rem;">Probestunde</a>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <div style="background: rgba(0, 210, 255, 0.1); display: inline-block; padding: 0.5rem 1.5rem; border-radius: 100px; margin-bottom: 2rem; font-weight: 600; color: var(--primary-dark);">
-                4 Jahre Erfahrung | Online Nachhilfe DACH
-            </div>
-            <h1>Mathe & Informatik<br><span>Nachhilfe bei Michael</span></h1>
-            <p>Hi, ich bin Michael. Als Softwareentwickler und Student von Mathe & Informatik helfe ich dir, die Welt der Zahlen und Logik wirklich zu verstehen.</p>
+    <header class="hero container">
+        <div class="hero-text" data-reveal>
+            <h1>Verstehen statt <span>Auswendiglernen</span></h1>
+            <p>Michael Andreas Berger – Softwareentwickler & Mathe-Student. Mit modernster Technik und echtem Fokus auf den Lernerfolg deiner Kinder.</p>
             <div class="hero-actions">
-                <a href="#termin" class="btn btn-primary">Kostenlose Probestunde</a>
+                <a href="#termin" class="btn btn-primary">Jetzt Probestunde sichern</a>
+            </div>
+        </div>
+        <div class="hero-image" data-reveal>
+            <div class="img-wrapper">
+                <img src="michael.jpg" alt="Michael Andreas Berger" onerror="this.src='https://via.placeholder.com/600x700?text=Michael+Andreas+Berger'">
+            </div>
+            <div class="floating-badge">
+                <span style="font-size: 2.5rem;">👨‍💻</span>
+                <div>
+                    <strong style="display: block;">4+ Jahre</strong>
+                    Nachhilfe-Expertise
+                </div>
             </div>
         </div>
     </header>
 
-    <section id="uber-mich" class="section container">
-        <div class="about-card" data-reveal>
-            <div class="about-visual">
-                <!-- User's photo should be placed here as michael.jpg -->
-                <img src="michael.jpg" alt="Michael Andreas Berger">
+    <section id="über-mich" class="section container">
+        <div class="section-title" data-reveal>
+            <span style="font-weight: 800; color: var(--primary); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem;">Persönliche Betreuung</span>
+            <h2>Hallo liebe Schüler und Eltern</h2>
+        </div>
+        <div class="card-grid">
+            <div class="card" style="grid-column: span 2;" data-reveal>
+                <p style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 2.5rem; line-height: 1.6;">Ich bin Michael. Als Softwareentwickler und Student der Mathematik und Informatik helfe ich Schülern seit über 4 Jahren dabei, ihre Lieblingsfächer (und auch die schwierigen) wirklich zu meistern.</p>
+                <p>Die Welt der Zahlen und Logik begeistert mich jeden Tag aufs Neue. Dieses Feuer möchte ich weitergeben. Mathematik ist für mich kein trockenes Fach, sondern eine Entdeckungsreise durch faszinierende Wissensbereiche.</p>
+                <div style="margin-top: 3.5rem; padding: 2.5rem; background: var(--bg-soft); border-radius: 20px; border-left: 6px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+                    <p style="font-style: italic; font-weight: 500; font-size: 1.25rem; color: var(--text-main);">„Im KI-Zeitalter ist echtes Verständnis die wichtigste Kompetenz – nicht das bloße Wiedergeben von Wissen.“</p>
+                </div>
             </div>
-            <div class="about-content">
-                <span class="tagline">Michael Andreas Berger</span>
-                <h2>Mehr als nur Nachhilfe.</h2>
-                <p>Ich bin Softwareentwickler und studiere aktuell Mathematik und Informatik. Seit über 4 Jahren begleite ich Schüler auf ihrem Weg zu besseren Noten und echtem Verständnis.</p>
-                <p>Mein Unterricht ist keine trockene Theorie. Durch meine Arbeit als Entwickler bringe ich Praxisbeispiele ein, die Informatik und Mathe lebendig machen.</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
-                    <div style="background: var(--bg-soft); padding: 1.5rem; border-radius: 20px;">
-                        <strong style="display: block; color: var(--primary-dark); font-size: 1.2rem;">4+ Jahre</strong>
-                        Erfahrung im Unterrichten
+            <div class="card" data-reveal>
+                <div class="img-wrapper" style="border-radius: 15px; overflow: hidden; margin-bottom: 2rem; height: 200px;">
+                    <img src="workspace_stock.png" alt="Arbeitsplatz" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3>Praxisbezug</h3>
+                <p>Als Entwickler bringe ich reale Beispiele aus der IT-Welt ein, die abstrakte Probleme plötzlich logisch und greifbar machen.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="methodik" class="section container">
+        <div class="method-container" data-reveal>
+            <div class="method-image" data-reveal>
+                <img src="tablet_method.png" alt="Unterricht mit Tablet" onerror="this.style.display='none'">
+            </div>
+            <div class="method-list">
+                <div class="section-title" style="margin-bottom: 3rem;">
+                    <h2>Moderner Unterricht</h2>
+                    <p>Ich gestalte meine Stunden interaktiv und wissenschaftlich fundiert.</p>
+                </div>
+                <div class="method-point" data-reveal>
+                    <span class="number">01</span>
+                    <div>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Visuelles Lernen</h4>
+                        <p>Einsatz von Videos und Farben. Dank Tablet & Stift siehst du jeden Rechenweg live auf deinem Bildschirm.</p>
                     </div>
-                    <div style="background: var(--bg-soft); padding: 1.5rem; border-radius: 20px;">
-                        <strong style="display: block; color: var(--primary-dark); font-size: 1.2rem;">Tablet & Stift</strong>
-                        Visuelles, live Lernen
+                </div>
+                <div class="method-point" data-reveal>
+                    <span class="number">02</span>
+                    <div>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 0.5rem;">KI-Monitoring</h4>
+                        <p>Gezielter Einsatz von KI, um Wissenslücken präzise zu identifizieren und deinen Fortschritt zu dokumentieren.</p>
+                    </div>
+                </div>
+                <div class="method-point" data-reveal>
+                    <span class="number">03</span>
+                    <div>
+                        <h4 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Uni-Ressourcen</h4>
+                        <p>Ich nutze bewährte Sekundärliteratur der Uni, um auch komplexe Themen über den Tellerrand hinaus zu erklären.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="container" data-reveal>
-        <div class="stock-banner">
-            <img src="workspace_stock.png" alt="Moderner Arbeitsplatz">
+    <section id="fächer" class="section container">
+        <div class="section-title text-center" style="margin-left: auto; margin-right: auto;" data-reveal>
+            <h2>Was ich anbiete</h2>
         </div>
-    </div>
-
-    <section id="leistungen" class="section container">
-        <div style="text-align: center; margin-bottom: 5rem;" data-reveal>
-            <h2 style="font-size: 3.5rem;">Was wir gemeinsam meistern</h2>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;">
-            <div style="background: white; padding: 3.5rem 2.5rem; border-radius: var(--radius); border: 1px solid #e2e8f0;" data-reveal>
-                <div style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary);">∑</div>
-                <h3>Mathematik</h3>
-                <p>Von der Grundschule bis zum Abitur. Analysis, Geometrie, Stochastik. Wir finden den „Aha-Moment“.</p>
+        <div class="card-grid">
+            <div class="card" data-reveal>
+                <div class="card-icon-wrapper">
+                    <span class="card-icon">∑</span>
+                </div>
+                <h3>Mathematik 5–13</h3>
+                <p>Individuelle Betreuung für alle Schulformen. Perfekte Vorbereitung auf Klassenarbeiten, Abitur und Matura.</p>
+                <div class="img-wrapper" style="margin-top: auto; border-radius: 15px; overflow: hidden; height: 180px; margin-top: 2rem;">
+                    <img src="informatics_visual.png" alt="Mathe & Code" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
             </div>
-            <div style="background: white; padding: 3.5rem 2.5rem; border-radius: var(--radius); border: 1px solid #e2e8f0;" data-reveal>
-                <div style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--secondary);">{}</div>
+            <div class="card" data-reveal>
+                <div class="card-icon-wrapper">
+                    <span class="card-icon">{}</span>
+                </div>
                 <h3>Informatik</h3>
-                <p>Programmierung, Algorithmen und Logik. Als Softwareentwickler zeige ich dir, wie es wirklich funktioniert.</p>
+                <p>Programmierung, Logik und Software-Grundlagen. Wir bauen dein Verständnis von der Pike auf auf.</p>
             </div>
-            <div style="background: white; padding: 3.5rem 2.5rem; border-radius: var(--radius); border: 1px solid #e2e8f0;" data-reveal>
-                <div style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--accent);">🌐</div>
+            <div class="card" data-reveal>
+                <div class="card-icon-wrapper">
+                    <div style="color: var(--zoom);">
+                        <svg class="brand-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 6.431V17.57c0 1.95 1.58 3.53 3.531 3.53h11.364c1.95 0 3.531-1.58 3.531-3.53V6.431c0-1.95-1.581-3.53-3.531-3.53H3.531C1.581 2.901 0 4.481 0 6.431zm18.426 1.76l4.436-3.23c.732-.533 1.138-.117 1.138.566v12.946c0 .683-.406 1.1-.11.566l-4.436-3.23a.473.473 0 01-.194-.383V8.574c0-.158.07-.306.194-.383z"/></svg>
+                    </div>
+                </div>
                 <h3>100% Online</h3>
-                <p>Bequem über Zoom. Keine Anfahrt, flexible Zeiten, digitale Materialien inklusive.</p>
+                <p>Bequem über Zoom. Ortsunabhängig für die gesamte DACH-Region. Maximale Flexibilität für deinen Alltag.</p>
             </div>
         </div>
     </section>
 
-    <section id="preise" class="section container" data-reveal>
-        <div style="background: var(--bg-soft); border-radius: 60px; padding: 120px 2rem; text-align: center;">
-            <div style="background: white; max-width: 550px; margin: 0 auto; padding: 5rem 4rem; border-radius: 40px; box-shadow: var(--shadow); border: 2px solid var(--primary);">
-                <h3 style="font-size: 2rem;">Einzelstunde Online</h3>
-                <div style="font-size: 6rem; font-weight: 800; font-family: 'Outfit'; margin: 1.5rem 0;">19€<span>/Std.</span></div>
-                <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">60 Minuten intensives 1-zu-1 Lernen</p>
-                <a href="#termin" class="btn btn-primary">Jetzt Probestunde buchen</a>
-                <p style="margin-top: 2rem; font-weight: 700; color: var(--primary-dark);">Erste Stunde kostenlos!</p>
-            </div>
+    <section id="preise" class="section container">
+        <div style="background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-radius: 40px; padding: 120px 4rem; text-align: center; position: relative; overflow: hidden;" data-reveal>
+            <span style="text-transform: uppercase; letter-spacing: 0.2em; font-weight: 800; font-size: 0.9rem; opacity: 0.7;">Transparente Preise</span>
+            <div style="font-size: clamp(4rem, 10vw, 7rem); font-weight: 800; font-family: 'Outfit'; line-height: 1; margin: 2rem 0;">19€ <span style="font-size: 2rem; opacity: 0.6; font-weight: 400;">/ Std.</span></div>
+            <p style="font-size: 1.2rem; margin-bottom: 3.5rem; opacity: 0.8; max-width: 600px; margin-left: auto; margin-right: auto;">Inklusive aller Übungsmaterialien, individueller Betreuung und Fortschritts-Monitoring.</p>
+            <a href="#termin" class="btn" style="background: white; color: var(--text-main);">Kostenlose Probestunde</a>
         </div>
     </section>
 
     <section id="termin" class="section container">
-        <div style="text-align: center; margin-bottom: 4rem;" data-reveal>
-            <h2>Wähle deinen Wunschtermin</h2>
+        <div class="section-title text-center" style="margin-left: auto; margin-right: auto;" data-reveal>
+            <h2>Termin vereinbaren</h2>
+            <p>Wähle einfach einen freien Slot für unser erstes Kennenlernen.</p>
         </div>
-        <div style="background: white; border-radius: 40px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid rgba(0, 210, 255, 0.15);" data-reveal>
-            <iframe src="https://calendar.app.google/SBpXDVH7Ebe1NZN46" style="width: 100%; height: 750px; border: none;"></iframe>
+        <div style="background: white; border-radius: 40px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid rgba(0,210,255,0.1);" data-reveal>
+            <iframe src="https://calendar.app.google/SBpXDVH7Ebe1NZN46" style="width: 100%; height: 850px; border: none;"></iframe>
         </div>
     </section>
 
-    <section id="kontakt" class="section container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
+    <section id="kontakt" class="section container" style="padding-bottom: 160px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; align-items: center;">
             <div data-reveal>
-                <h2 style="font-size: 3.5rem;">Fragen? Schreib mir.</h2>
-                <p style="font-size: 1.2rem; margin-top: 1rem;">Ich antworte dir persönlich innerhalb weniger Stunden.</p>
+                <h2 style="font-size: 3rem;">Persönlich anfragen</h2>
+                <p style="font-size: 1.25rem; color: var(--text-muted); margin-top: 1rem;">Ich freue mich auf deine Nachricht und antworte in der Regel sofort.</p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;" data-reveal>
-                <a href="mailto:michael.andreas.berger@outlook.com" style="display: flex; align-items: center; gap: 1.5rem; padding: 2rem; background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); text-decoration: none; color: inherit; border: 1px solid transparent; transition: var(--transition);">
-                    <div style="font-size: 2.5rem;">✉️</div>
+            <div style="display: grid; gap: 2rem;" data-reveal>
+                <a href="mailto:michael.andreas.berger@outlook.com" style="display: flex; align-items: center; gap: 2rem; padding: 2.5rem; background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); text-decoration: none; color: inherit; transition: var(--transition); border: 1px solid #eee;">
+                    <span style="font-size: 2.5rem;">✉️</span>
                     <div>
-                        <div style="font-weight: 700; font-size: 1.2rem;">E-Mail</div>
-                        <div style="color: var(--text-muted);">michael.andreas.berger@outlook.com</div>
+                        <strong style="display: block; font-size: 1.2rem;">E-Mail schreiben</strong>
+                        <span style="color: var(--text-muted);">michael.andreas.berger@outlook.com</span>
                     </div>
                 </a>
-                <a href="https://wa.me/4917634620094" target="_blank" style="display: flex; align-items: center; gap: 1.5rem; padding: 2rem; background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); text-decoration: none; color: inherit; border: 1px solid transparent; transition: var(--transition);">
-                    <div style="font-size: 2.5rem;">📱</div>
+                <a href="https://wa.me/4917634620094" target="_blank" style="display: flex; align-items: center; gap: 2rem; padding: 2.5rem; background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); text-decoration: none; color: inherit; transition: var(--transition); border: 1px solid #eee;">
+                    <div style="color: var(--whatsapp);">
+                        <svg class="brand-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </div>
                     <div>
-                        <div style="font-weight: 700; font-size: 1.2rem;">WhatsApp</div>
-                        <div style="color: var(--text-muted);">+49 176 34620094</div>
+                        <strong style="display: block; font-size: 1.2rem;">WhatsApp</strong>
+                        <span style="color: var(--text-muted);">+49 176 34620094</span>
                     </div>
                 </a>
             </div>
@@ -469,16 +566,17 @@
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Michael Andreas Berger | SynthLernen</p>
-            <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem;">
-                <a href="javascript:void(0)" onclick="openModal('impressum')" style="color: var(--text-muted); text-decoration: none;">Impressum</a>
-                <a href="javascript:void(0)" onclick="openModal('datenschutz')" style="color: var(--text-muted); text-decoration: none;">Datenschutz</a>
+        <div class="container" style="text-align: center; padding: 80px 0; border-top: 1px solid rgba(0,0,0,0.05);">
+            <p style="font-weight: 800; font-size: 1.4rem;">Michael Andreas Berger</p>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Online Nachhilfe für die DACH-Region</p>
+            <div style="margin-top: 2.5rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                <a href="javascript:void(0)" onclick="openModal('impressum')" style="color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500;">Impressum</a>
+                <a href="javascript:void(0)" onclick="openModal('datenschutz')" style="color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500;">Datenschutz</a>
             </div>
         </div>
     </footer>
 
-    <!-- Legal Modals -->
+    <!-- Modals -->
     <div id="legal-modal" class="legal-modal">
         <div class="legal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -486,66 +584,29 @@
         </div>
     </div>
 
-    <!-- Cookie Banner -->
-    <div id="cookie-banner">
-        <div>
-            <strong>Datenschutz-Hinweis:</strong> Wir nutzen keine Tracking-Cookies. Nur technisch notwendige Funktionen für den Kalender werden geladen.
-        </div>
-        <button onclick="acceptCookies()" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">Verstanden</button>
-    </div>
-
     <script>
         // Reveal Logic
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('revealed');
-            });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
         }, { threshold: 0.1 });
-        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
-        // Cookie Banner Logic
-        if (!localStorage.getItem('cookies-accepted')) {
-            setTimeout(() => document.getElementById('cookie-banner').classList.add('active'), 1000);
-        }
-        function acceptCookies() {
-            localStorage.setItem('cookies-accepted', 'true');
-            document.getElementById('cookie-banner').classList.remove('active');
-        }
+        // Navbar Logic
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            window.scrollY > 50 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
 
         // Modal Logic
         const modalTexts = {
-            impressum: `
-                <h2>Impressum</h2><br>
-                <p><strong>Angaben gemäß § 5 TMG:</strong></p><br>
-                <p>Michael Andreas Berger<br>
-                [DEINE STRASSE]<br>
-                [DEIN PLZ & ORT]</p><br>
-                <p><strong>Kontakt:</strong><br>
-                E-Mail: michael.andreas.berger@outlook.com<br>
-                Telefon: [DEINE TELEFONNUMMER]</p><br>
-                <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
-                Michael Andreas Berger</p>
-            `,
-            datenschutz: `
-                <h2>Datenschutz</h2><br>
-                <p>Diese Website erhebt keine personenbezogenen Daten, außer jene, die Sie uns freiwillig per E-Mail oder über die Terminbuchung (Google Calendar) mitteilen.</p><br>
-                <p><strong>Google Calendar:</strong> Für die Terminbuchung wird ein Widget von Google eingebunden. Hierbei können Daten an Google übertragen werden.</p>
-            `
+            impressum: `<h2>Impressum</h2><br><p><strong>Michael Andreas Berger</strong><br>[STRASSE]<br>[ORT]</p><br><p>E-Mail: michael.andreas.berger@outlook.com<br>WhatsApp: +49 176 34620094</p>`,
+            datenschutz: `<h2>Datenschutz</h2><br><p>Diese Website nutzt Google Calendar. Bei Nutzung können Daten an Google übertragen werden.</p>`
         };
-
         function openModal(type) {
             document.getElementById('modal-text').innerHTML = modalTexts[type];
             document.getElementById('legal-modal').style.display = 'flex';
         }
-        function closeModal() {
-            document.getElementById('legal-modal').style.display = 'none';
-        }
-
-        // Navbar Scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            window.scrollY > 60 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
-        });
+        function closeModal() { document.getElementById('legal-modal').style.display = 'none'; }
     </script>
 </body>
 </html>
